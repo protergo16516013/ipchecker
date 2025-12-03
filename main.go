@@ -101,6 +101,7 @@ func handleReports(client *abuseipdb.Client, args []string) {
 	fs := flag.NewFlagSet("reports", flag.ExitOnError)
 	ip := fs.String("ip", "", "IP address (required)")
 	page := fs.Int("page", 0, "Page number")
+	maxAge := fs.Int("max-age", 0, "Max age in days")
 	perPage := fs.Int("per-page", 25, "Results per page")
 
 	fs.Parse(args)
@@ -109,7 +110,7 @@ func handleReports(client *abuseipdb.Client, args []string) {
 		log.Fatal("--ip flag is required")
 	}
 
-	response, err := client.Reports(*ip, *page, *perPage)
+	response, err := client.Reports(*ip, *page, *perPage, *maxAge)
 	if err != nil {
 		log.Fatal(err)
 	}

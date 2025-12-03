@@ -67,14 +67,17 @@ func (c *Client) Check(ip string, maxAgeInDays int, verbose bool) (*CheckRespons
 	return &response, nil
 }
 
-func (c *Client) Reports(ip string, page int, perPage int) (*ReportsResponse, error) {
+func (c *Client) Reports(ip string, page int, perPage int, maxAgeInDays int) (*ReportsResponse, error) {
 	body := RequestBody{
 		IpAddress: ip,
 		Page:      strconv.Itoa(page),
 		PerPage:   strconv.Itoa(perPage),
 	}
+	if maxAgeInDays > 0 {
+		body.MaxAgeInDays = strconv.Itoa(maxAgeInDays)
+	}
 
-	res, err := c._request(GET, CHECK_ENDPOINT, body, c.default_header)
+	res, err := c._request(GET, REPORTS_ENDPOINT, body, c.default_header)
 	if err != nil {
 		println("Error whilst making request:", err)
 		return nil, err
