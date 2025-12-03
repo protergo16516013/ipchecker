@@ -1,0 +1,16 @@
+AbuseIPDB CLI
+Usage:
+  ./abuseip-db <action> [flags]
+
+Actions:
+  check              Check an IP address
+  config             Configure api and stuff
+  report             Report an IP address
+  reports            Get reports for an IP
+  blacklist          Get the blacklist
+  check-block        Check a network block
+  bulk-report        Report multiple IPs
+  clear-address      Clear reports for an address
+
+Example:
+  ./abuseip-db check 127.0.0.1 --max-age 90 --verbose
